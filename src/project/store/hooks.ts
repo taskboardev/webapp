@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { actions, selectors, State } from '../store';
+import { actions, selectors, State } from './index';
 
 export function useCreateUser() {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ export function useDeleteTask() {
 
 export function useCreateStatus() {
   const dispatch = useDispatch();
-  return useCallback((status: { title: string, projectId: string }) => {
+  return useCallback((status: { title: string }) => {
     dispatch(actions.createStatus(status));
   }, [dispatch]);
 }
@@ -72,12 +72,12 @@ export function useCreateChildComment() {
 
 export function useMoveStatus() {
   const dispatch = useDispatch();
-  return useCallback((projectId: string, src: number, dest: number) => {
-    dispatch(actions.moveStatus(projectId, src, dest));
+  return useCallback((src: number, dest: number) => {
+    dispatch(actions.moveStatus(src, dest));
   }, [dispatch]);
 }
 
-export function useMoveProjectStatusTask() {
+export function useMoveStatusTask() {
   const dispatch = useDispatch();
   return useCallback((taskId: string, srcStatusId: string, src: number, destStatusId: string, dest: number) => {
     dispatch(actions.moveStatusTask(taskId, srcStatusId, src, destStatusId, dest));

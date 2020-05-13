@@ -6,7 +6,7 @@ export const createUser = (data: Partial<User>) => {
   return actionCreators.create('user', user.id, user);
 };
 
-export const createStatus = (data: { id?: string, projectId: string, title: string }, emit: boolean = true) => {
+export const createStatus = (data: { id?: string, title: string }, emit: boolean = true) => {
   const status = makeStatus(data);
   return actionCreators.create('status', status.id, status);
 };
@@ -62,8 +62,8 @@ export const createChildComment = (data: { id?: string, parentCommentId: string,
   );
 };
 
-export const moveStatus = (projectId: string, src: number, dest: number, emit: boolean = true) => {
-  return actionCreators.moveAttached('project', projectId, 'statusIds', src, dest);
+export const moveStatus = (src: number, dest: number, emit: boolean = true) => {
+  return actionCreators.move('status', src, dest);
 };
 
 export const moveStatusTask = (taskId: string, srcStatusId: string, src: number, destStatusId: string, dest: number, emit: boolean = true) => {
