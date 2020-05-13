@@ -63,7 +63,7 @@ export const useLaneStyles = makeStyles((theme) => ({
   tasks: {
     padding: theme.spacing(1.5),
   },
-  task: {
+  taskContainer: {
     marginBottom: theme.spacing(.5),
     padding: theme.spacing(1),
     display: 'flex',

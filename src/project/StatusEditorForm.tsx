@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 
-import { ConfirmationButtons } from '../components';
+import { ConfirmationButtons } from '../components/buttons';
 
 export interface Props {
   title?: string,

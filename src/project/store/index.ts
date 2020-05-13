@@ -6,3 +6,5 @@ import * as hooks from './hooks';
 export type State = ProjectData;
 export { actions, selectors, hooks };
 export * from './StoreProvider';
+
+export const emptyArray = [];

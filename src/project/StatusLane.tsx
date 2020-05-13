@@ -15,17 +15,17 @@ import {
 } from 'react-beautiful-dnd';
 
 import { useAuth } from '../auth';
-import { hooks } from './store';
+import { hooks, emptyArray } from './store';
 
 import { OptionsPopper } from '../components/options-popper';
-// import { TaskEditorForm } from '../task';
 import { ConfirmationButtons } from '../components/buttons';
 import StatusOptions from './StatusOptions';
 import StatusEditorForm from './StatusEditorForm';
 import TaskCard from './TaskCard';
+import TaskEditorForm from './TaskEditorForm';
 
 import { useLaneStyles, useCommonStyles } from './styles';
-import './overrides.css';
+// import './overrides.css';
 
 
 export interface Props {
@@ -129,22 +129,17 @@ export default function StatusLane({ id, dragHandleProps }: Props) {
         )}
       </div>
 
-      <Droppable type="task" droppableId={id.toString()}>
+      <Droppable type="taskCard" droppableId={id.toString()}>
         {(provided: DroppableProvided) => {
           return (
             <div ref={provided.innerRef} {...provided.droppableProps} className={classNames.tasks}>
-              {taskIds.map((taskId, index) => (
+              {(taskIds || emptyArray).map((taskId, index) => (
                 <Draggable key={taskId} draggableId={taskId.toString()} index={index}>
                   {(provided: DraggableProvided) => {
                     return (
-                      <Paper
-                        className={classNames.task}
-                        ref={provided.innerRef}
-                        {...provided.dragHandleProps}
-                        {...provided.draggableProps}
-                      >
-                        <TaskCard statusId={id} id={taskId}/>
-                      </Paper>
+                      <div className={classNames.taskContainer} ref={provided.innerRef} {...provided.draggableProps}>
+                        <TaskCard statusId={id} id={taskId} dragHandleProps={provided.dragHandleProps} />
+                      </div>
                     )
                   }}
                 </Draggable>

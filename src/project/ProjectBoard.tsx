@@ -12,7 +12,7 @@ import {
   DraggableProvided,
 } from 'react-beautiful-dnd';
 
-import { hooks } from './store';
+import { hooks, emptyArray } from './store';
 import { useBoardStyles } from './styles';
 import StatusEditorForm from './StatusEditorForm';
 import StatusLane from './StatusLane';
@@ -37,11 +37,11 @@ export default function ProjectBoard() {
 
   const handleDragEnd = ({ type, source, destination, draggableId }: DropResult) => {
     if (source && destination) {
-      if (type === 'status' && moveStatus) {
+      if (type === 'statusLane' && moveStatus) {
         moveStatus(source.index, destination.index);
       }
 
-      if (type === 'task' && moveTask) {
+      if (type === 'taskCard' && moveTask) {
         moveTask(
           draggableId,
           source.droppableId,
@@ -78,11 +78,11 @@ export default function ProjectBoard() {
           {(provided: DroppableProvided) => {
             return (
               <div ref={provided.innerRef} {...provided.droppableProps} className={classNames.lanes}>
-                {statusIds.map((statusId, index) => (
+                {(statusIds || emptyArray).map((statusId, index) => (
                   <Draggable key={statusId} draggableId={statusId.toString()} index={index}>
                     {(provided: DraggableProvided) => {
                       return (
-                        <div className={classNames.laneContainer} ref={provided.innerRef}>
+                        <div className={classNames.laneContainer} ref={provided.innerRef} {...provided.draggableProps}>
                           <StatusLane id={statusId} dragHandleProps={provided.dragHandleProps} />
                         </div>
                       )

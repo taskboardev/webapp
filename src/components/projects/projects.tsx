@@ -16,8 +16,6 @@ export default function Projects({ userId }: Props) {
   return (
     <div>
       <NewProject/>
-
-
     </div>
   );
 }

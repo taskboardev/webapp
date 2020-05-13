@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { hooks } from './store';
+import { hooks, emptyArray } from './store';
 
 import { Comment as CommentView } from '../components/comment';
 
@@ -23,7 +23,7 @@ export default function Comment({ id }: Props) {
     createChildComment({ value, parentCommentId: id });
   };
 
-  const childCommentsElement = childCommentIds.map(childId => <Comment id={childId}/>);
+  const childCommentsElement = (childCommentIds || emptyArray).map(childId => <Comment id={childId}/>);
 
   return (
     <CommentView

@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import Paper from '@material-ui/core/Paper';
+import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 
 import { OptionsPopper } from '../components/options-popper';
 import { NewComment } from '../components/comment';
 
-import { hooks } from './store';
+import { hooks, emptyArray } from './store';
 import TaskOptions from './TaskOptions';
 import TaskEditorForm from './TaskEditorForm';
 import Comment from './Comment';
@@ -16,10 +17,12 @@ import { useCardStyles } from './styles';
 export interface Props {
   id: string,
   statusId: string,
+  dragHandleProps: DraggableProvidedDragHandleProps
 }
 
-export default function TaskCard({ id }: Props) {
+export default function TaskCard({ id, dragHandleProps }: Props) {
   const classes = useCardStyles();
+
   const updateTask = hooks.useUpdateTask();
   const deleteTask = hooks.useDeleteTask();
   const createComment = hooks.useCreateRootComment();
@@ -49,7 +52,7 @@ export default function TaskCard({ id }: Props) {
   };
 
   return (
-    <div className={classes.task}>
+    <Paper className={classes.task} {...dragHandleProps}>
       <div className={classes.taskHeader}>
         <Typography>{title}</Typography>
 
@@ -88,11 +91,11 @@ export default function TaskCard({ id }: Props) {
       </div>
 
       <div>
-        {rootCommentIds.map(commentId => (
+        {(rootCommentIds || emptyArray).map(commentId => (
           <Comment id={commentId} />
         ))}
       </div>
-    </div>
+    </Paper>
   );
 }
 

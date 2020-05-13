@@ -6,13 +6,15 @@ import { useAuth } from '../../auth';
 import { Project } from '../../project';
 
 export default function ProjectPage() {
-  const router = useRouter();
-  const guardElement = useAuthGuard();
-  const { id } = useAuth();
+  // todo: enable and fix auth guard after board is styled
 
-  if (guardElement) {
-    return guardElement;
-  }
+  // const router = useRouter();
+  // const guardElement = useAuthGuard();
+  // const { id } = useAuth();
+  //
+  // if (guardElement) {
+  //   return guardElement;
+  // }
 
-  return <Project id={id} />
+  return <Project />
 }

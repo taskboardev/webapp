@@ -1,8 +1,6 @@
 import firebase from 'firebase';
 
-const firebaseConfig = {
-  // todo: add in fb creds here
-};
+const firebaseConfig = require(__dirname + '/../../' + process.env.FIREBASE_CONFIG_PATH);
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
