@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+import { useStyles } from './styles';
 
 export interface Props {
   onSubmit: (value: string) => void,
@@ -7,6 +11,7 @@ export interface Props {
 
 export default function NewComment({ onSubmit, onCancel }: Props) {
   const [value, setValue] = useState('');
+  const classNames = useStyles();
 
   const handleClickSubmit = () => {
     if (!!value) {
@@ -22,12 +27,17 @@ export default function NewComment({ onSubmit, onCancel }: Props) {
 
   return (
     <div>
-      <textarea
+      <TextField
+        multiline autoFocus fullWidth
         value={value}
         onChange={e => setValue(e.target.value)}
       />
-      <button onClick={handleClickCancel}>Cancel</button>
-      <button onClick={handleClickSubmit}>Reply</button>
+      <div className={classNames.newCommentButtons}>
+        <div>
+          <Button onClick={handleClickCancel} variant="text">Cancel</Button>
+          <Button onClick={handleClickSubmit} color="primary">Reply</Button>
+        </div>
+      </div>
     </div>
   );
 }

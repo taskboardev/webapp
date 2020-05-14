@@ -5,12 +5,12 @@ import Paper from '@material-ui/core/Paper';
 import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 
 import { OptionsPopper } from '../components/options-popper';
-import { NewComment } from '../components/comment';
+import { TextButton } from '../components/buttons';
 
-import { hooks, emptyArray } from './store';
+import { hooks } from './store';
 import TaskOptions from './TaskOptions';
 import TaskEditorForm from './TaskEditorForm';
-import Comment from './Comment';
+import TaskDetails from './TaskDetails';
 import { useCardStyles } from './styles';
 
 
@@ -21,20 +21,11 @@ export interface Props {
 }
 
 export default function TaskCard({ id, dragHandleProps }: Props) {
-  const classes = useCardStyles();
+  const classNames = useCardStyles();
 
   const updateTask = hooks.useUpdateTask();
   const deleteTask = hooks.useDeleteTask();
-  const createComment = hooks.useCreateRootComment();
-  const { title, description, rootCommentIds } = hooks.useTask(id);
-
-  const [isCommentFormShown, setIsCommentFormShown] = useState(false);
-  const showCommentForm = () => setIsCommentFormShown(true);
-  const hideCommentForm = () => setIsCommentFormShown(false);
-  const handleSubmitComment = (value: string) => {
-    createComment({ value, taskId: id });
-    hideCommentForm();
-  };
+  const { title, description, assigneeId } = hooks.useTask(id);
 
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const openEditor = () => setIsEditorOpen(true);
@@ -51,10 +42,14 @@ export default function TaskCard({ id, dragHandleProps }: Props) {
     }
   };
 
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const openDetails = () => setIsDetailsOpen(true);
+  const closeDetails = () => setIsDetailsOpen(false);
+
   return (
-    <Paper className={classes.task} {...dragHandleProps}>
-      <div className={classes.taskHeader}>
-        <Typography>{title}</Typography>
+    <Paper className={classNames.task} {...dragHandleProps}>
+      <div className={classNames.taskHeader}>
+        <Typography className={classNames.title}>{title}</Typography>
 
         <OptionsPopper>
           <TaskOptions
@@ -66,7 +61,7 @@ export default function TaskCard({ id, dragHandleProps }: Props) {
 
       {isEditorOpen &&
       <Dialog open={isEditorOpen}>
-        <Paper className={classes.dialog}>
+        <Paper className={classNames.dialog}>
           <TaskEditorForm
             title={title}
             description={description}
@@ -77,24 +72,10 @@ export default function TaskCard({ id, dragHandleProps }: Props) {
       </Dialog>
       }
 
-      <div>
-        {!isCommentFormShown &&
-        <button onClick={showCommentForm}>Reply</button>
-        }
-
-        {isCommentFormShown &&
-        <NewComment
-          onSubmit={handleSubmitComment}
-          onCancel={hideCommentForm}
-        />
-        }
-      </div>
-
-      <div>
-        {(rootCommentIds || emptyArray).map(commentId => (
-          <Comment id={commentId} />
-        ))}
-      </div>
+      <TextButton onClick={openDetails}>View Task</TextButton>
+      {isDetailsOpen &&
+      <TaskDetails id={id} isOpen={isDetailsOpen} close={closeDetails} />
+      }
     </Paper>
   );
 }

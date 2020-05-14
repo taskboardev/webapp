@@ -67,6 +67,12 @@ export function useCreateChildComment() {
     dispatch(actions.createChildComment(comment));
   }, [dispatch]);
 }
+export function useDeleteComment() {
+  const dispatch = useDispatch();
+  return useCallback((id: string) => {
+    dispatch(actions.deleteComment(id));
+  }, [dispatch]);
+}
 
 
 

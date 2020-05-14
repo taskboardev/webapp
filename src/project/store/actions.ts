@@ -58,8 +58,12 @@ export const createChildComment = (data: { id?: string, parentCommentId: string,
 
   return actionCreators.batch(
     actionCreators.create('comment', comment.id, comment),
-    actionCreators.attach('comment', comment.id, 'comment', data.parentCommentId)
+    actionCreators.attach('comment', comment.id, 'parentCommentId', data.parentCommentId)
   );
+};
+
+export const deleteComment = (id: string, emit: boolean = true) => {
+  return actionCreators.delete('comment', id);
 };
 
 export const moveStatus = (src: number, dest: number, emit: boolean = true) => {

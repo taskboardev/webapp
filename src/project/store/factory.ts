@@ -13,7 +13,7 @@ export const makeTask = (task: Partial<Task> = {}): Task => {
   return {
     id: task.id || uuid(),
     title: task.title || '',
-    description: task.title || '',
+    description: task.description || '',
     statusId: task.statusId || '',
     tagIds: task.tagIds || [],
     creatorId: task.creatorId || '',

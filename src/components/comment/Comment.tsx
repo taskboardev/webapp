@@ -2,19 +2,24 @@ import React, { ReactNode, useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 
 import NewComment from './NewComment';
+import { TextButton, DeleteButton } from '../buttons';
+import { useStyles } from './styles';
 
 export interface Props {
   value: string,
   childComments?: ReactNode,
   onSubmitReply?: (value: string) => void,
+  onDelete?: () => void,
 }
 
 export default function Comment({
   value,
   childComments,
   onSubmitReply,
+  onDelete,
 }: Props) {
   const [isReplyOpen, setIsReplyOpen] = useState(false);
+  const classNames = useStyles();
 
   const handleSubmitReply = (replyValue: string) => {
     if (onSubmitReply) {
@@ -27,17 +32,22 @@ export default function Comment({
   const handleCancelReply = () => setIsReplyOpen(false);
 
   return (
-    <div>
-      <Typography>{value}</Typography>
+    <div className={classNames.comment}>
+      <div className={classNames.commentHeader}>
+        <Typography>{value}</Typography>
+        {onDelete && <DeleteButton onClick={onDelete} />}
+      </div>
 
-      <button onClick={() => setIsReplyOpen(true)}>Reply</button>
+      <TextButton onClick={() => setIsReplyOpen(true)} color="primary">Reply</TextButton>
 
       {isReplyOpen &&
-      <NewComment onSubmit={handleSubmitReply} onCancel={handleCancelReply}/>
+      <div className={classNames.childrenContainer}>
+        <NewComment onSubmit={handleSubmitReply} onCancel={handleCancelReply}/>
+      </div>
       }
 
-      <div style={{ marginLeft: 20 }}>
-      {childComments}
+      <div className={classNames.childrenContainer}>
+        {childComments}
       </div>
     </div>
   );

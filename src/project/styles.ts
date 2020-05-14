@@ -65,7 +65,6 @@ export const useLaneStyles = makeStyles((theme) => ({
   },
   taskContainer: {
     marginBottom: theme.spacing(.5),
-    padding: theme.spacing(1),
     display: 'flex',
   },
   dialog: {
@@ -75,13 +74,33 @@ export const useLaneStyles = makeStyles((theme) => ({
 
 export const useCardStyles = makeStyles((theme) => ({
   task: {
+    padding: theme.spacing(1),
     width: '100%',
   },
   taskHeader: {
     display: 'flex',
     justifyContent: 'space-between'
   },
+  title: {
+    marginTop: 2,
+  },
   dialog: {
     padding: theme.spacing(2)
+  },
+}));
+
+export const useTaskDetailsStyles = makeStyles(theme => ({
+  taskDetails: {
+    padding: theme.spacing(1.5),
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  title: {
+    width: '100%'
   }
+}));
+
+export const useCommentStyles = makeStyles(theme => ({
 }));
