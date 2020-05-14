@@ -12,12 +12,18 @@ import {
   DraggableProvided,
 } from 'react-beautiful-dnd';
 
+import { useAuth } from '../auth';
 import { hooks, emptyArray } from './store';
 import { useBoardStyles } from './styles';
 import StatusEditorForm from './StatusEditorForm';
 import StatusLane from './StatusLane';
+import UserOnboarding from './UserOnboarding';
 
 export default function ProjectBoard() {
+  const { id: authId } = useAuth();
+  const userId = hooks.useUser(authId);
+  const createUser = hooks.useCreateUser();
+
   const statusIds = hooks.useStatusIds();
   const createStatus = hooks.useCreateStatus();
   const moveStatus = hooks.useMoveStatus();
@@ -25,6 +31,13 @@ export default function ProjectBoard() {
 
   const [isFormOpen, setIsFormOpen] = useState(false);
   const classNames = useBoardStyles();
+
+  if (!userId) {
+    const handleSubmit = (username: string) => createUser({ id: authId, username });
+    return (
+      <UserOnboarding id={authId} onSubmit={handleSubmit} />
+    )
+  }
 
   const handleSubmitNewStatus = (title: string) => {
     if (createStatus) {

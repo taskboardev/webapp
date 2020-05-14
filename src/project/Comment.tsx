@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Comment as CommentView } from '../components/comment';
-import { DeleteButton } from '../components/buttons';
 import { hooks, emptyArray } from './store';
 
 export interface Props {
@@ -24,7 +23,7 @@ export default function Comment({ id }: Props) {
   };
 
   const childCommentsElement = (
-    <>{(childCommentIds || emptyArray).map(childId => <Comment id={childId}/>)}</>
+    <>{(childCommentIds || emptyArray).map(childId => <Comment key={childId} id={childId}/>)}</>
   );
 
   return (

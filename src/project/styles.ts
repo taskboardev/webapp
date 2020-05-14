@@ -104,3 +104,9 @@ export const useTaskDetailsStyles = makeStyles(theme => ({
 
 export const useCommentStyles = makeStyles(theme => ({
 }));
+
+export const useOnboardingStyles = makeStyles(theme => ({
+  onboarding: {
+    padding: theme.spacing(1.5),
+  }
+}));

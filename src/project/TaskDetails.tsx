@@ -94,7 +94,7 @@ export default function TaskDetails({ id, isOpen, close }: Props) {
 
         <div>
           {rootCommentIds?.length
-           ? <Typography>Comments</Typography>
+           ? <Typography variant="subtitle2">Comments</Typography>
            : <Typography>No comments yet...</Typography>
           }
 
@@ -104,7 +104,7 @@ export default function TaskDetails({ id, isOpen, close }: Props) {
           }
 
           {rootCommentIds?.map(commentId => (
-            <Comment id={commentId} />
+            <Comment key={commentId} id={commentId} />
           ))}
         </div>
       </div>
