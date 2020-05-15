@@ -57,13 +57,13 @@ export function useCreateTag() {
 }
 export function useCreateRootComment() {
   const dispatch = useDispatch();
-  return useCallback((comment: { value: string, taskId: string }) => {
+  return useCallback((comment: { value: string, taskId: string, creatorId: string }) => {
     dispatch(actions.createRootComment(comment));
   }, [dispatch]);
 }
 export function useCreateChildComment() {
   const dispatch = useDispatch();
-  return useCallback((comment: { value: string, parentCommentId: string }) => {
+  return useCallback((comment: { value: string, parentCommentId: string, creatorId: string }) => {
     dispatch(actions.createChildComment(comment));
   }, [dispatch]);
 }
@@ -122,4 +122,8 @@ export function useTag(id: string) {
 }
 export function useComment(id: string) {
   return useSelector((state: State) => selectors.getComment(state, { id }));
+}
+
+export function useCommentUsername(id: string) {
+  return useSelector((state: State) => selectors.getCommentUsername(state, { id }));
 }

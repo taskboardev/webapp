@@ -11,3 +11,18 @@ export const getTask = (state: ProjectData, args: { id: string }) => selectors.g
 export const getStatus = (state: ProjectData, args: { id: string }) => selectors.getEntity<Status>(state, { type: 'status', id: args.id });
 export const getTag = (state: ProjectData, args: { id: string }) => selectors.getEntity<Tag>(state, { type: 'tag', id: args.id });
 export const getComment = (state: ProjectData, args: { id: string }) => selectors.getEntity<Comment>(state, { type: 'comment', id: args.id });
+
+
+export const getCommentUsername = (state: ProjectData, args: { id }) => {
+  const comment = getComment(state, args);
+  if (!comment) {
+    return '';
+  }
+
+  const user = getUser(state, { id: comment.creatorId });
+  if (!user) {
+    return '';
+  }
+
+  return user.username;
+};

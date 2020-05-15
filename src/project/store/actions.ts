@@ -42,22 +42,24 @@ export const createTag = (data: Partial<Tag>, emit: boolean = true) => {
   return actionCreators.create('tag', tag.id, tag);
 };
 
-export const createRootComment = (data: { id?: string, taskId: string, value: string }, emit: boolean = true) => {
+export const createRootComment = (data: { id?: string, taskId: string, value: string, creatorId: string }, emit: boolean = true) => {
   const comment = makeComment(data);
 
   // a root comment must have a task
   // so create the comment and attach it to the task
   return actionCreators.batch(
     actionCreators.create('comment', comment.id, comment),
+    actionCreators.attach('comment', comment.id, 'creatorId', data.creatorId),
     actionCreators.attach('comment', comment.id, 'taskId', data.taskId)
   );
 };
 
-export const createChildComment = (data: { id?: string, parentCommentId: string, value: string }, emit: boolean = true) => {
+export const createChildComment = (data: { id?: string, parentCommentId: string, value: string, creatorId: string }, emit: boolean = true) => {
   const comment = makeComment(data);
 
   return actionCreators.batch(
     actionCreators.create('comment', comment.id, comment),
+    actionCreators.attach('comment', comment.id, 'creatorId', data.creatorId),
     actionCreators.attach('comment', comment.id, 'parentCommentId', data.parentCommentId)
   );
 };

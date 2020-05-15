@@ -1322,10 +1322,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@taskboar/model@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@taskboar/model/-/model-0.2.0.tgz#959a9d95d33a2cfca853d7d65a1d2cbbc2662a63"
-  integrity sha512-hDE/R3mDjNVLnZREfAYn2/tLU4d1YnYetHZuNz5XzMud6GodCRaQpzyNfOd1+r4hm4Sn7ZVmlFvs+VeXdJuOjg==
+"@taskboar/model@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@taskboar/model/-/model-0.3.1.tgz#527c0e5ee38ea86b8f9472cc74b55398ae61d757"
+  integrity sha512-fBr8ldrHWaXpOqqjvRhymSrSFxdsEKON4GVIErOE0BfhjDMrF91N6LTKGM5o14Hh0VeKwBdeBIR2taT1Tl/FMg==
   dependencies:
     normalized-reducer "^0.4.0"
 

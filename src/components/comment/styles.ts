@@ -7,8 +7,6 @@ export const useStyles = makeStyles(theme => ({
     borderLeft: 'solid 1px #ccc'
   },
   commentHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
   },
   childrenContainer: {
     marginLeft: theme.spacing(2),

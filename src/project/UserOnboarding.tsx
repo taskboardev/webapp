@@ -27,7 +27,6 @@ export default function UserOnboarding({ id, onSubmit }: Props) {
       <div className={classNames.onboarding}>
         <Typography>Welcome!</Typography>
 
-
         <TextField
           placeholder="Display name:"
           value={cleanedName}
