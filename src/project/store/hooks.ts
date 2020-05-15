@@ -11,7 +11,7 @@ export function useCreateUser() {
 
 export function useCreateTask() {
   const dispatch = useDispatch();
-  return useCallback((task: { title: string, creatorId: string, statusId: string, description?: string }) => {
+  return useCallback((task: { title: string, creatorId: string, statusId: string }) => {
     dispatch(actions.createTask(task));
   }, [dispatch]);
 }

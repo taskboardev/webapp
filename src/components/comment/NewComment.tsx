@@ -31,6 +31,7 @@ export default function NewComment({ onSubmit, onCancel }: Props) {
         multiline autoFocus fullWidth
         value={value}
         onChange={e => setValue(e.target.value)}
+        placeholder="Leave a comment:"
       />
       <div className={classNames.newCommentButtons}>
         <div>

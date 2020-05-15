@@ -6,7 +6,7 @@ import { ConfirmationButtons } from '../components/buttons';
 export interface Props {
   title?: string,
   description?: string,
-  onSubmit: (title: string, description: string) => void
+  onSubmit: (title: string) => void
   onCancel: () => void
 }
 
@@ -14,23 +14,19 @@ export default function TaskEditorForm({
   onSubmit,
   onCancel,
   title: initialTitle = '',
-  description: initialDescription = ''
 }: Props) {
   const [title, setTitle] = useState(initialTitle);
-  const [description, setDescription] = useState(initialDescription);
 
   const handleSubmit = () => {
     if (title) {
-      onSubmit(title, description);
+      onSubmit(title);
       setTitle('');
-      setDescription('');
     }
   };
 
   const handleCancel = () => {
     onCancel();
     setTitle('');
-    setDescription('');
   };
 
   return (
@@ -41,14 +37,6 @@ export default function TaskEditorForm({
         placeholder="Title"
         value={title}
         onChange={e => setTitle(e.target.value)}
-      />
-
-      <TextField
-        fullWidth
-        multiline
-        placeholder="Description"
-        value={description}
-        onChange={e => setDescription(e.target.value)}
       />
 
       <ConfirmationButtons onConfirm={handleSubmit} onCancel={handleCancel} />

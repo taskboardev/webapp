@@ -95,10 +95,14 @@ export default function TaskDetails({ id, isOpen, close }: Props) {
         <hr/>
 
         <div>
-          {rootCommentIds?.length
-           ? <Typography variant="subtitle2">Comments</Typography>
-           : <Typography>No comments yet...</Typography>
-          }
+          <Typography variant="subtitle2">Assigned to:</Typography>
+
+        </div>
+
+        <hr/>
+
+        <div>
+          <Typography variant="subtitle2">{rootCommentIds?.length ? 'Comments' : 'No comments yet...'}</Typography>
 
           {isCommentFormShown
             ? <NewComment onSubmit={handleSubmitComment} onCancel={hideCommentForm}/>

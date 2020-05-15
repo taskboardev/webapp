@@ -29,7 +29,7 @@ export const createTask = (data: Partial<Task>, emit: boolean =true) => {
   );
 };
 
-export const updateTask = (id: string, task: { title?: string, description?: string }, emit: boolean = true) => {
+export const updateTask = (id: string, task: { title?: string }, emit: boolean = true) => {
   return actionCreators.update('task', id, task);
 };
 

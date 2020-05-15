@@ -52,9 +52,9 @@ export default function StatusLane({ id, dragHandleProps }: Props) {
   const openDeleteConfirm = () => setIsDeleteConfirmOpen(true);
   const closeDeleteConfirm = () => setIsDeleteConfirmOpen(false);
 
-  const handleSubmitNewTask = (title: string, description?: string) => {
+  const handleSubmitNewTask = (title: string) => {
     if (createTask && creatorId) {
-      createTask({ title, description, statusId: id, creatorId });
+      createTask({ title, statusId: id, creatorId });
     }
     closeTaskForm();
   };
