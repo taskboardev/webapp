@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
-import Dialog from '@material-ui/core/Dialog';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -22,7 +21,8 @@ export interface Props {
 
 export default function TaskCard({ id, dragHandleProps }: Props) {
   const classNames = useCardStyles();
-  const { title } = hooks.useTask(id);
+  const { title, assigneeId } = hooks.useTask(id);
+  const assignee = hooks.useUser(assigneeId);
   const deleteTask = hooks.useDeleteTask();
   const handleClickDelete = () => {
     if (deleteTask) {
@@ -37,7 +37,13 @@ export default function TaskCard({ id, dragHandleProps }: Props) {
   return (
     <Paper className={classNames.task} {...dragHandleProps}>
       <div className={classNames.taskHeader}>
-        <Typography className={classNames.title}>{title}</Typography>
+        <div>
+          <Typography className={classNames.title}>{title}</Typography>
+
+          {assignee &&
+          <Typography variant="subtitle2">Assigned to {assignee.username}</Typography>
+          }
+        </div>
 
         <OptionsPopper>
           <List>

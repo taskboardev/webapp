@@ -10,6 +10,7 @@ import { NewComment } from '../components/comment';
 
 import { hooks } from './store';
 import Comment from './Comment';
+import TaskAssignment from './TaskAssignment';
 import { useTaskDetailsStyles } from './styles';
 
 export interface Props {
@@ -96,7 +97,7 @@ export default function TaskDetails({ id, isOpen, close }: Props) {
 
         <div>
           <Typography variant="subtitle2">Assigned to:</Typography>
-
+          <TaskAssignment id={id} />
         </div>
 
         <hr/>

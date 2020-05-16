@@ -27,6 +27,18 @@ export function useDeleteTask() {
     dispatch(actions.deleteTask(id));
   }, [dispatch]);
 }
+export function useAssignTask() {
+  const dispatch = useDispatch();
+  return useCallback((taskId: string, userId: string) => {
+    dispatch(actions.assignTask(taskId, userId));
+  }, [dispatch])
+}
+export function useUnassignTask() {
+  const dispatch = useDispatch();
+  return useCallback((taskId: string, userId: string) => {
+    dispatch(actions.unassignTask(taskId, userId));
+  }, [dispatch])
+}
 
 
 export function useCreateStatus() {

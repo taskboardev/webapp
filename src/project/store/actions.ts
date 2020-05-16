@@ -37,6 +37,14 @@ export const deleteTask = (id: string, emit: boolean = true) => {
   return actionCreators.delete('task', id);
 };
 
+export const assignTask = (taskId: string, userId: string, emit: boolean = true) => {
+  return actionCreators.attach('task', taskId, 'assigneeId', userId);
+};
+
+export const unassignTask = (taskId: string, userId: string, emit: boolean = true) => {
+  return actionCreators.detach('task', taskId, 'assigneeId', userId);
+};
+
 export const createTag = (data: Partial<Tag>, emit: boolean = true) => {
   const tag = makeTag(data);
   return actionCreators.create('tag', tag.id, tag);

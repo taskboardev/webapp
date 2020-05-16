@@ -110,3 +110,15 @@ export const useOnboardingStyles = makeStyles(theme => ({
     padding: theme.spacing(1.5),
   }
 }));
+
+export const useTaskAssignmentStyles = makeStyles(theme => ({
+  container: {
+    display: 'flex'
+  },
+  select: {
+    width: '50%'
+  },
+  unassignBtn: {
+    padding: theme.spacing(1)
+  }
+}));
