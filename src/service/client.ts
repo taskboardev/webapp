@@ -10,10 +10,12 @@ export class ServiceClient {
   }
 
   setToken(token: any) {
+    console.log(`set token: ${token ? token.substr(0, 10) : 'undefined'}...`);
     this.httpClient.defaults.headers.authorization = token ? `Bearer ${token.toString()}` : undefined;
   }
 
   async getUserProjectTitles(userId: string) {
+    console.log('calling getUserProjectTitles')
     const response = await this.httpClient.get(`/projects?owner=${userId}`);
     return response.data;
   }

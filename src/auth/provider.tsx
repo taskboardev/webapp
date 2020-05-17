@@ -6,7 +6,7 @@ import { authClient } from './authClient';
 
 export interface AuthState {
   isInitialized?: boolean,
-  isAuthenticated?: boolean,
+  isUserAuthenticated?: boolean,
   id?: string,
   token?: string,
   isLoading?: boolean,
@@ -28,12 +28,12 @@ export function AuthProvider({ children }: Props) {
     setIsInitialized(true);
   });
 
-  const value = {
+  const value: AuthState = {
     isInitialized,
-    isAuthenticated: !!user?.uid,
+    isUserAuthenticated: !!user?.uid,
     id: user?.uid,
     token,
-    loading: isLoading,
+    isLoading,
     error,
   };
 

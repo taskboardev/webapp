@@ -1,27 +1,38 @@
 import { useState } from 'react';
 import { useAsync, useAsyncCallback } from 'react-async-hook';
-import { useService } from '../../service';
+import { useServiceClient } from '../../service';
 import { useRouter } from 'next/router';
+
+import { TextButton } from '../buttons';
 
 interface Props {
   userId: string,
 }
 
 export default function Projects({ userId }: Props) {
-  const service = useService();
-  const { error, loading, result } = useAsync<Record<string, string>>(
+  const service = useServiceClient();
+  const { error, loading, result } = useAsync<({ id: string, title: string })[]>(
     service.getUserProjectTitles.bind(service), [userId]
   );
+
+  const router = useRouter();
 
   return (
     <div>
       <NewProject/>
+      {result && result.map(({ id, title }) => {
+        return (
+          <div>
+            <TextButton key={id} onClick={() => router.push(`/projects/${id}`)}>{title}</TextButton>
+          </div>
+        )
+      })}
     </div>
   );
 }
 
 export function NewProject() {
-  const service = useService();
+  const service = useServiceClient();
   const router = useRouter();
   const [title, setTitle] = useState('');
 
